@@ -1,3 +1,3 @@
-rootProject.name = "EnigmaIRCJ"
+rootProject.name = "EIRC Themulator"
 include("client")
 include("server")
