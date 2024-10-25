@@ -109,7 +109,7 @@ public class Gui {
      */
     public static void showWelcomeMessage() {
         JLabel message = new JLabel("Welcome to EnigmaIRC Themulator!");
-        message.setForeground(new Color(0, 245, 0));
+        message.setForeground(activeTheme.getColor("system-good-message"));
         message.setFont(new Font(Font.SANS_SERIF, Font.BOLD, activeTheme.getSize("welcome-message-font-size")));
         message.setBorder(new EmptyBorder(0, 0, 10, 0));
 
