@@ -1,5 +1,7 @@
 package ru.dfhub.eirc;
 
+import ru.dfhub.eirc.util.Theme;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -29,6 +31,8 @@ public class Gui {
     private static final Color COMPONENT_BORDER_COLOR = Color.decode("#614376");
 
     private static boolean isMinimized = false;
+
+    private static Theme activeTheme = Theme.DEFAULT_THEME;
 
     public static void init() {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
