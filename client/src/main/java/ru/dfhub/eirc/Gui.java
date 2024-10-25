@@ -19,7 +19,7 @@ public class Gui {
         SELF_USER_MESSAGE, USER_MESSAGE, SYSTEM_GOOD, SYSTEM_INFO, SYSTEM_ERROR, USER_SESSION
     }
 
-    private static final JFrame window = new JFrame("EnigmaIRC Themulator");
+    private static final JFrame window = new JFrame("EnigmaIRC Themulator (TEST ONLY)");
     private static final Box mainPanel = Box.createVerticalBox();
 
     private static final Box messageBox = Box.createVerticalBox();
@@ -108,7 +108,7 @@ public class Gui {
      * Used instead of SYSTEM_GOOD due to increased font size
      */
     public static void showWelcomeMessage() {
-        JLabel message = new JLabel("Welcome to EnigmaIRC Themulator!");
+        JLabel message = new JLabel("Welcome to EnigmaIRC Themulator! (TEST ONLY)");
         message.setForeground(activeTheme.getColor("system-good-message"));
         message.setFont(new Font(Font.SANS_SERIF, Font.BOLD, activeTheme.getSize("welcome-message-font-size")));
         message.setBorder(new EmptyBorder(0, 0, 10, 0));
