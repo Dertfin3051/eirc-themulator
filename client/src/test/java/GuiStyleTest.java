@@ -1,7 +1,9 @@
 import ru.dfhub.eirc.Gui;
 
+@Deprecated
 public class GuiStyleTest {
     public static void main(String[] args) {
+        // Non actual
         Gui.init();
         Gui.showWelcomeMessage();
         Gui.showNewMessage("Good info message", Gui.MessageType.SYSTEM_GOOD);

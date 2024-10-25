@@ -149,25 +149,12 @@ public class Gui {
     private static void updateWindow() { window.revalidate(); window.repaint(); }
 
     /**
+     * DISABLED (TEST ONLY)
      * Handle inputField "Enter" button
      * @param e Event
      */
     private static void inputAction(ActionEvent e) {
-        String input = inputField.getText();
-        switch (input) {
-            case "!!clear" -> messageBox.removeAll();
-            case "!!exit" -> {
-                // Send exit message
-                System.exit(0);
-            }
-            default -> {
-                DataParser.handleOutputMessage(inputField.getText());
-            }
-        }
 
-        inputField.setText("");
-        scrollDown();
-        updateWindow(); // Update
     }
 
     public static void applyAppIcon(JFrame frame) {
