@@ -56,8 +56,8 @@ public class Gui {
         inputFieldPanel.setBorder(new EmptyBorder(5, 0, 0, 0)); // Top padding
         inputFieldPanel.add(inputField);
         inputField.setPreferredSize(new Dimension(800, 30)); // 25px to input field & 5px free space
-        inputField.setForeground(Color.WHITE);
-        inputField.setCaretColor(Color.WHITE); // Input text color
+        inputField.setForeground(Color.decode("#ffffff"));
+        inputField.setCaretColor(Color.decode("#ffffff")); // Input text color
         setBackgroundColor(inputField, "#27202e");
         inputField.setBorder(new LineBorder(COMPONENT_BORDER_COLOR));
 
@@ -85,9 +85,9 @@ public class Gui {
     public static void showNewMessage(String formattedMessage, MessageType type) {
         JLabel message = new JLabel(formattedMessage);
         switch (type) {
-            case SYSTEM_GOOD -> message.setForeground(new Color(0, 245, 0));
-            case SYSTEM_INFO -> message.setForeground(new Color(245, 245, 0));
-            case SYSTEM_ERROR -> message.setForeground(new Color(245, 0, 0));
+            case SYSTEM_GOOD -> message.setForeground(Color.decode("#00f500"));
+            case SYSTEM_INFO -> message.setForeground(Color.decode("#f5f500"));
+            case SYSTEM_ERROR -> message.setForeground(Color.decode("#f50000"));
             case SELF_USER_MESSAGE -> message.setForeground(Color.decode("#cbb6dc"));
             case USER_MESSAGE -> message.setForeground(Color.WHITE);
             case USER_SESSION -> message.setForeground(Color.decode("#ffb148"));

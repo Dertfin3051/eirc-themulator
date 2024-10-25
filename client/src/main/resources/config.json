@@ -3,5 +3,20 @@
   "server-address" : "",
   "server-port" : 6667,
   "security-key" : "",
-  "notification-sounds" : true
+  "notification-sounds" : true,
+  "theme" : {
+    "background" : "#2a1f33",
+    "message-read-box" : "#4b3c57",
+    "message-input-box" : "#27202e",
+    "input-text-color" : "#ffffff",
+    "other-user-message" : "#ffffff",
+    "self-user-message" : "#cbb6dc",
+    "system-good-message" : "#00f500",
+    "system-info-message" : "#f5f500",
+    "system-error-message" : "#f50000",
+    "component-border-color" : "#614376",
+
+    "welcome-message-font-size" : 18,
+    "message-font-size" : 15
+  }
 }
