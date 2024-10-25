@@ -28,11 +28,10 @@ public class Gui {
     private static final Box inputFieldPanel = Box.createHorizontalBox();
     private static final JTextField inputField = new JTextField();
 
-    private static final Color COMPONENT_BORDER_COLOR = Color.decode("#614376");
+    private static Theme activeTheme;
 
     private static boolean isMinimized = false;
 
-    private static Theme activeTheme = Theme.DEFAULT_THEME;
 
     public static void init() {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -48,26 +47,27 @@ public class Gui {
 
         mainPanel.setPreferredSize(new Dimension(800, 500));
         mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10)); // Window padding
-        setBackgroundColor(mainPanel, "#2a1f33");
+        //setBackgroundColor(mainPanel, activeTheme.getColor("background"));
 
         messageBoxScrollbar.setPreferredSize(new Dimension(780, 450));
         messageBoxScrollbar.getHorizontalScrollBar().setPreferredSize(new Dimension(800, 8));
         messageBoxScrollbar.getVerticalScrollBar().setPreferredSize(new Dimension(8, 500));
         messageBox.setBorder(new EmptyBorder(7, 7, 7, 7)); // Message Box padding
-        setBackgroundColor(messageBox, "#4b3c57");
-        messageBoxScrollbar.setBorder(new LineBorder(COMPONENT_BORDER_COLOR));
+        //setBackgroundColor(messageBox, activeTheme.getColor("message-read-box"));
+        //messageBoxScrollbar.setBorder(new LineBorder(COMPONENT_BORDER_COLOR));
 
         inputFieldPanel.setBorder(new EmptyBorder(5, 0, 0, 0)); // Top padding
         inputFieldPanel.add(inputField);
         inputField.setPreferredSize(new Dimension(800, 30)); // 25px to input field & 5px free space
-        inputField.setForeground(Color.decode("#ffffff"));
-        inputField.setCaretColor(Color.decode("#ffffff")); // Input text color
-        setBackgroundColor(inputField, "#27202e");
-        inputField.setBorder(new LineBorder(COMPONENT_BORDER_COLOR));
+        //inputField.setForeground(activeTheme.getColor("input-text-color"));
+        //inputField.setCaretColor(activeTheme.getColor("input-text-color")); // Input text color
+        //setBackgroundColor(inputField, activeTheme.getColor("message-input-box"));
+        //inputField.setBorder(new LineBorder(COMPONENT_BORDER_COLOR));
 
 
         inputField.addActionListener(Gui::inputAction);
 
+        applyTheme(Theme.DEFAULT_THEME);
         mainPanel.add(messageBoxScrollbar); mainPanel.add(inputFieldPanel);
         window.add(mainPanel);
         show();
@@ -89,14 +89,14 @@ public class Gui {
     public static void showNewMessage(String formattedMessage, MessageType type) {
         JLabel message = new JLabel(formattedMessage);
         switch (type) {
-            case SYSTEM_GOOD -> message.setForeground(Color.decode("#00f500"));
-            case SYSTEM_INFO -> message.setForeground(Color.decode("#f5f500"));
-            case SYSTEM_ERROR -> message.setForeground(Color.decode("#f50000"));
-            case SELF_USER_MESSAGE -> message.setForeground(Color.decode("#cbb6dc"));
-            case USER_MESSAGE -> message.setForeground(Color.WHITE);
-            case USER_SESSION -> message.setForeground(Color.decode("#ffb148"));
+            case SYSTEM_GOOD -> message.setForeground(activeTheme.getColor("system-good-message"));
+            case SYSTEM_INFO -> message.setForeground(activeTheme.getColor("system-info-message"));
+            case SYSTEM_ERROR -> message.setForeground(activeTheme.getColor("system-error-message"));
+            case SELF_USER_MESSAGE -> message.setForeground(activeTheme.getColor("self-user-message"));
+            case USER_MESSAGE -> message.setForeground(activeTheme.getColor("other-user-message"));
+            case USER_SESSION -> message.setForeground(activeTheme.getColor("user-session-message"));
         }
-        message.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+        message.setFont(new Font(Font.SANS_SERIF, Font.BOLD, activeTheme.getSize("message-font-size")));
 
         messageBox.add(message);
         scrollDown();
@@ -110,7 +110,7 @@ public class Gui {
     public static void showWelcomeMessage() {
         JLabel message = new JLabel("Welcome to EnigmaIRC!");
         message.setForeground(new Color(0, 245, 0));
-        message.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
+        message.setFont(new Font(Font.SANS_SERIF, Font.BOLD, activeTheme.getSize("welcome-message-font-size")));
         message.setBorder(new EmptyBorder(0, 0, 10, 0));
 
         messageBox.add(message);
@@ -184,10 +184,25 @@ public class Gui {
     /**
      * Change JComponent background color
      * @param component JComponent
-     * @param hex Hex-color (# and 6 symbols)
+     * @param color Color
      */
-    private static void setBackgroundColor(JComponent component, String hex) {
-        component.setOpaque(true); component.setBackground(Color.decode(hex));
+    private static void setBackgroundColor(JComponent component, Color color) {
+        component.setOpaque(true); component.setBackground(color);
+    }
+
+    public static void applyTheme(Theme theme) {
+        activeTheme = theme;
+
+        Color componentBorderColor = activeTheme.getColor("component-border-color");
+
+        setBackgroundColor(mainPanel, activeTheme.getColor("background"));
+        setBackgroundColor(messageBox, activeTheme.getColor("message-read-box"));
+        messageBoxScrollbar.setBorder(new LineBorder(componentBorderColor));
+        inputField.setForeground(activeTheme.getColor("input-text-color"));
+        inputField.setCaretColor(activeTheme.getColor("input-text-color"));
+        setBackgroundColor(inputField, activeTheme.getColor("message-input-box"));
+        inputField.setBorder(new LineBorder(componentBorderColor));
+        updateWindow();
     }
 
 }

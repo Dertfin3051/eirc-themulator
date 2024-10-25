@@ -2,6 +2,7 @@ package ru.dfhub.eirc;
 
 import org.json.JSONObject;
 import ru.dfhub.eirc.util.Encryption;
+import ru.dfhub.eirc.util.Theme;
 
 public class Main {
 
@@ -21,6 +22,10 @@ public class Main {
             Gui.showNewMessage("An error occurred while reading the config!", Gui.MessageType.SYSTEM_ERROR);
             Gui.breakInput();
         }
+
+        Gui.applyTheme(new Theme(
+                config.optJSONObject("theme", new JSONObject("{}")) // Theme or empty
+        ));
 
         /*
         Trying to load encryption key

@@ -2,6 +2,7 @@ package ru.dfhub.eirc.util;
 
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.util.List;
 
 public class Theme {
@@ -16,6 +17,7 @@ public class Theme {
             "system-good-message",
             "system-info-message",
             "system-error-message",
+            "user-session-message",
             "component-border-color",
             "welcome-message-font-size",
             "message-font-size"
@@ -27,18 +29,19 @@ public class Theme {
 
     private final JSONObject themeObject;
 
-    public Theme(JSONObject themeObject) throws IllegalArgumentException {
-        for (String param : paramList) {
-            if (!themeObject.has(param)) throw new IllegalArgumentException("Can't find theme param %s".formatted(param));
-        }
+    public Theme(JSONObject themeObject) {
         this.themeObject = themeObject;
     }
 
-    public String getColor(String colorParam) {
-        return themeObject.optString(colorParam, "#ffffff");
+    public Color getColor(String colorParam) {
+        String color = themeObject.optString(colorParam, "");
+        return color.isEmpty() ? DEFAULT_THEME.getColor(colorParam) : Color.decode(color);
     }
 
     public int getSize(String sizeParam) {
-        return themeObject.optInt(sizeParam, 15);
+        return themeObject.optInt(
+                sizeParam,
+                15
+        );
     }
 }
